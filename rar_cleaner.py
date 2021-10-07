@@ -22,20 +22,17 @@ def walk_dirs():
         print(f"CHECKING {dir_path}")
 
         if has_unrar_file(dir_path):
-            print(f"Found .unrar file, skipping {dir_path}")
             continue
 
         rar_files = get_rar_files(dir_path)
 
         if len(rar_files) == 0:
-            print(f"No rar files found, skipping {dir_path}")
             save_unrar_file(dir_path)
             continue
 
         moved_files = move_unrared_files(dir_path)
 
         if len(moved_files) > 0:
-            print(f"Unrared files found and moved, not unraring {dir_path}")
             save_unrar_file(dir_path)
             continue
 
