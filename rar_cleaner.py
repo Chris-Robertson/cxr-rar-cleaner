@@ -3,7 +3,7 @@ import glob
 import shutil
 import subprocess
 
-torrent_dir = "/volume1/downloads/complete"
+start_dir = "/volume1/downloads/complete"
 unrar_dir = "/volume1/downloads/complete/_unrar"
 unrar_flag_file = ".unrar"
 unrared_filetypes = ["mkv", "mp4", "avi", "iso"]
@@ -17,7 +17,7 @@ def main():
 
 def walk_dirs():
 
-    for dir_path, sub_dirs, files in os.walk(torrent_dir):
+    for dir_path, sub_dirs, files in os.walk(start_dir):
 
         print(f"CHECKING {dir_path}")
 
