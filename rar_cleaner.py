@@ -6,7 +6,7 @@ import subprocess
 torrent_dir = "/volume1/downloads/complete"
 unrar_dir = "/volume1/downloads/complete/_unrar"
 unrar_flag_file = ".unrar"
-unrared_filetypes = ["mkv", "mp4"]
+unrared_filetypes = ["mkv", "mp4", "avi", "iso"]
 unrar_command = ["unrar", "x"]
 
 
