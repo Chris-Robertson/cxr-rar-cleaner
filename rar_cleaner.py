@@ -4,13 +4,10 @@ import shutil
 import subprocess
 
 torrent_dir = "/volume1/downloads/complete"
-# torrent_dir = "./test"
 unrar_dir = "/volume1/downloads/complete/_unrar"
-# unrar_dir = "./test/_unrar"
 unrar_flag_file = ".unrar"
-unrared_filetypes = ["mkv"]
+unrared_filetypes = ["mkv", "mp4"]
 unrar_command = ["unrar", "x"]
-# unrar_command = ["mv", "-v"]
 
 
 def main():
