@@ -3,23 +3,25 @@ import glob
 import shutil
 import subprocess
 
-start_dir = "/volume1/downloads/complete"
+downloads_dir = "/volume1/downloads/complete"
 unrar_dir = "/volume1/downloads/complete/_unrar"
 unrar_flag_file = ".unrar"
+hardlink_flag_file = ".hardlink"
 unrared_filetypes = ["mkv", "mp4", "avi", "iso"]
 unrar_command = ["unrar", "x"]
 
 
 def main():
     setup_dirs()
-    walk_dirs()
+    # walk_dirs_for_unrar(downloads_dir)
+    walk_dirs_for_hardlink(downloads_dir)
 
 
-def walk_dirs():
+def walk_dirs_for_unrar(start_dir):
 
     for dir_path, sub_dirs, files in os.walk(start_dir):
 
-        print(f"CHECKING {dir_path}")
+        print(f"CHECKING FOR UNRAR {dir_path}")
 
         if has_unrar_file(dir_path):
             continue
@@ -40,6 +42,17 @@ def walk_dirs():
         save_unrar_file(dir_path)
 
 
+def walk_dirs_for_hardlink(start_dir):
+
+    for dir_path, sub_dirs, files in os.walk(start_dir):
+
+        print(f"CHECKING FOR HARDLINK {dir_path}")
+        if has_hardlinks_file(dir_path):
+            continue
+
+        save_hardlink_file(dir_path)
+
+
 def setup_dirs():
     try:
         os.makedirs(unrar_dir)
@@ -48,8 +61,15 @@ def setup_dirs():
 
 
 def has_unrar_file(dir_path):
-    unrar_file = os.path.join(dir_path, unrar_flag_file)
-    return os.path.isfile(unrar_file)
+    return is_file(os.path.join(dir_path, unrar_flag_file))
+
+
+def has_hardlinks_file(dir_path):
+    return is_file(os.path.join(dir_path, hardlink_flag_file))
+
+
+def is_file(file):
+    return os.path.isfile(file)
 
 
 def get_rar_files(dir_path):
@@ -75,7 +95,15 @@ def get_files_with_extension(dir_path, extension):
 
 
 def save_unrar_file(dir_path):
-    fp = open(os.path.join(dir_path, unrar_flag_file), "x")
+    save_file(dir_path, unrar_flag_file)
+
+
+def save_hardlink_file(dir_path):
+    save_file(dir_path, hardlink_flag_file)
+
+
+def save_file(dir_path, file):
+    fp = open(os.path.join(dir_path, file), "x")
     fp.close()
 
 
