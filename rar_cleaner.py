@@ -3,8 +3,9 @@ import glob
 import shutil
 import subprocess
 
-downloads_dir = "/volume1/downloads/complete"
-unrar_dir = "/volume1/downloads/complete/_unrar"
+movies_dir = "/volume1/data/torrents/movies"
+tv_dir = "/volume1/data/torrents/tv"
+unrar_dir = "/volume1/data/torrents/_unrar"
 unrar_flag_file = ".unrar"
 hardlink_flag_file = ".hardlink"
 unrared_filetypes = ["mkv", "mp4", "avi", "iso"]
@@ -13,8 +14,9 @@ unrar_command = ["unrar", "x"]
 
 def main():
     setup_dirs()
-    # walk_dirs_for_unrar(downloads_dir)
-    walk_dirs_for_hardlink(downloads_dir)
+    walk_dirs_for_unrar(movies_dir)
+    walk_dirs_for_unrar(tv_dir)
+    # walk_dirs_for_hardlink(downloads_dir)
 
 
 def walk_dirs_for_unrar(start_dir):
